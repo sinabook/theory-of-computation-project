@@ -201,7 +201,7 @@ class Dfa:
         if ((len(S_1_2_F_S) == 0)
                 and (len(S_2_1_F_S) == 0)):
             print('L1 and L2 are Equals')
-        #if neither is subset of each other they are seprated
+        #if neither of them are subset's of each other they are seprated
         if ((len(S_1_2_F_S) != 0)
                 and (len(S_2_1_F_S) != 0)):
             print('L1 and L2 are the Seperated')
