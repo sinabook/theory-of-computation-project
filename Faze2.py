@@ -8,16 +8,16 @@ class Dfa:
         self.final_states = final_states
         self.delta = delta
     def Empty(self):
-        #we check all string shorter or equal to the number of states on the language and if non of them get accepted the language is empty
+        #we can check all string shorter or equal to the number of states on the language and if non of them get accepted the language is empty
         all_str=self.Constructor(len(self.states))
         for _str in all_str:
             if (self.accepted(_str)):
                 print('The Language is not Empty')
-                return
+                return False
             print('The Language is Empty')
-            return
+            return True
     def Constructor(self, length):
-        #constructing the array of all strings with the defalut value of members of sigma
+        #Constructing the array of all strings with the defalut value of members of sigma
         all_str = self.sigma.copy()
         #copy is for that all changes done to all strings variable does not change the alphabet of strings
         num_sigma=len(self.sigma)
