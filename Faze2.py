@@ -190,6 +190,7 @@ class Dfa:
             #l1-l2 Print
             subtraction_l1l2 = [Combination, language.sigma, initial, S_1_2_F_S,delta_f]
             #print('\n\nThis is the DFA for L1-L2 \n %s' % (subtraction_l1l2))
+            #print('\n\nThis is the DFA for L1-L2 \n %s' % (subtraction_l1l2))
 
             #l2-l1 Print
             subtraction_l2l1 = [Combination, language.sigma, initial, S_2_1_F_S,delta_f]
