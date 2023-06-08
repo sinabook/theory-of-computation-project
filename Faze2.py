@@ -180,17 +180,17 @@ class Dfa:
             if (not (current_state_1 in self.final_states)
                     and (current_state_2 in language.final_states)):
                 S_2_1_F_S.append(states)
-            #union P
+            #union Print
             union = [Combination, language.sigma, initial, U_F_S,delta_f]
             
-            #intersection
+            #intersection Print
             intersection = [Combination, language.sigma, initial, I_F_S,delta_f]
             #print('\n\nThis is the DFA for Intersection of Languages \n %s' %(intersection))
-            #l1-l2 P
+            #l1-l2 Print
             subtraction_l1l2 = [Combination, language.sigma, initial, S_1_2_F_S,delta_f]
             #print('\n\nThis is the DFA for L1-L2 \n %s' % (subtraction_l1l2))
 
-            #l2-l1 P
+            #l2-l1 Print
             subtraction_l2l1 = [Combination, language.sigma, initial, S_2_1_F_S,delta_f]
             #print('\n\nThis is the DFA for L2-L1 \n %s' % (subtraction_l2l1))
         print('This is the DFA for Union of Languages \n %s' % (union))
