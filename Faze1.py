@@ -7,6 +7,7 @@ class Dfa:
         self.initial_state = initial_state
         self.final_states = final_states
         self.delta = delta
+
     def __str__(self):
         return f"states= {self.states}\nsigma= {self.sigma}\ninitial state= {self.initial_state}\nfinal states= {self.final_states}\ndelta= {self.delta}"
     
@@ -19,6 +20,7 @@ class Dfa:
                 return False
             print('The Language is Empty')
             return True
+        
     def Constructor(self, length):
         #Constructing the array of all strings with the defalut value of members of sigma
         all_str = self.sigma.copy()
@@ -34,6 +36,7 @@ class Dfa:
                 for letter in self.sigma:
                     all_str.append(_str + letter)
         return all_str
+    
     def accepted(self, _str):
         #Is by defualt the start state
         current_state = self.initial_state
@@ -73,6 +76,7 @@ class Dfa:
             print("The langauge is Inifinte")
         else:
             return (len(self.lan_elements()))
+        
     def Short(self):
         #we return the first element of the said array becuase we made strings by adding alphabets to previous ones
         
@@ -97,6 +101,7 @@ class Dfa:
                     length = self.num_elements()
                     long = self.lan_elements()[length - 1]
                     return (long)
+                
     def two_strings(self):
         accepted_str=[]
         not_accepted_str=[]
@@ -125,11 +130,13 @@ class Dfa:
                 
                     
         return [accepted_str,counter]
+    
     def Complement(self):
         new_final = list(set(self.states) - set(self.final_states))
         comp = Dfa(self.states, self.sigma, self.initial_state,
                             new_final, self.delta)
         return comp
+    
 L1= Dfa(
     ['A','B','C','E','F','G'], ['a', 'b'], 'A', ['A','B','C','F'], 
     {
@@ -159,6 +166,7 @@ L1= Dfa(
         },
         
     })
+
 print("Accepted func")
 print(L1.accepted('aba'))
 print("Constructor func")
