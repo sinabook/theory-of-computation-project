@@ -13,9 +13,9 @@ class Dfa:
         for _str in all_str:
             if (self.accepted(_str)):
                 print('The Language is not Empty')
-                return
+                return False
             print('The Language is Empty')
-            return
+            return True
     def Constructor(self, length):
         #constructing the array of all strings with the defalut value of members of sigma
         all_str = self.sigma.copy()
