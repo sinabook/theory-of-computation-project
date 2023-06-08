@@ -87,7 +87,7 @@ class Dfa:
     def Long(self):
         
             if (self.Infinite()):
-                print("Language is infinite!")
+                print("The Language is infinite!")
             else:
                 if len(self.lan_elements())!=0:
                     length = self.num_elements()
