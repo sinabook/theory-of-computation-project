@@ -127,6 +127,7 @@ class Dfa:
         comp = Dfa(self.states, self.sigma, self.initial_state,
                             new_final, self.delta)
         return comp
+    #this functions makes the second phase of the project
     def Operation(self, L2):
         #Combination
         delta = {}
