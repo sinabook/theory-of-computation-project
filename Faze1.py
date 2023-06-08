@@ -5,7 +5,7 @@ class Dfa:
         return f"states= {self.states}\nsigma= {self.sigma}\ninitial state= {self.initial_state}\nfinal states= {self.final_states}\ndelta= {self.delta}"
     
     def Empty(self):
-        #we check all string shorter or equal to the number of states on the language and if non of them get accepted the language is empty
+        #we can check all string shorter or equal to the number of states on the language and if non of them get accepted the language is empty
         all_str=self.Constructor(len(self.states))
         for _str in all_str:
             if (self.accepted(_str)):
