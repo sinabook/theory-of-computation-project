@@ -164,11 +164,11 @@ class Dfa:
         for states in Combination:
             current_state_1 = states[0]
             current_state_2 = states[1]
-            #union
+            #Union
             if ((current_state_1 in self.final_states)
                     or (current_state_2 in language.final_states)):
                 U_F_S.append(states)
-            #intersection
+            #Intersection
             if ((current_state_1 in self.final_states)
                     and (current_state_2 in language.final_states)):
                 I_F_S.append(states)
