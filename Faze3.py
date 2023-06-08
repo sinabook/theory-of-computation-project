@@ -58,6 +58,7 @@ class Dfa:
             if (len(_str) >= n and self.accepted(_str)):
                 return True
         return False
+    
     def lan_elements(self):
         if (self.Infinite()):
             print("The Language is Infinite")
@@ -74,6 +75,7 @@ class Dfa:
             print("The langauge is Inifinte")
         else:
             return (len(self.lan_elements()))
+        
     def Short(self):
         #we return the first element of the said array becuase we made strings by adding alphabets to previous ones
         
@@ -97,6 +99,7 @@ class Dfa:
                     length = self.num_elements()
                     long = self.lan_elements()[length - 1]
                     return (long)
+                
     def two_strings(self):
         accepted_str=[]
         not_accepted_str=[]
@@ -210,6 +213,7 @@ class Dfa:
         if ((len(S_1_2_F_S) != 0)
                 and (len(S_2_1_F_S) != 0)):
             print('L1 and L2 are the Seperated')
+
     def minimizing(self):
         Possible_combs = []#list that contains all combinations of states
         for i in self.states:
@@ -313,6 +317,7 @@ class Dfa:
                    new_delta))
         else:
             print('Your DFA is Minimized')
+
 class Nfa:
     def __init__(self, states, sigma, initial_state, final_states,
                  delta):
@@ -321,8 +326,10 @@ class Nfa:
         self.initial_state = initial_state
         self.final_states = final_states
         self.delta = delta
+
     def __str__(self):
         return f"states= {self.states}\nsigma= {self.sigma}\ninitial state= {self.initial_state}\nfinal states= {self.final_states}\ntransition function= {self.delta}"
+    
     def Del_lambda(self):#this only prints the delta with out the lambda transition
         new_delta={}
         for state in self.states:
@@ -360,6 +367,7 @@ class Nfa:
                     del all_delta[key]
             new_delta.update({state:all_delta})
         return new_delta
+    
     def fa_converter(self):#transition to a non-standard fa(meaning that the names of states are a list) and then transitioning that into a standard fa
         
         build_delta=self.delta
@@ -451,6 +459,32 @@ class Nfa:
 
         return Dfa(fa_form_states,self.sigma,initial_fa_form,final_fa_form,build_delta_fa_form)
 #inputs and functions for phase 3
+L31= Nfa(
+    ['A','B','C','D','E'], ['a', 'b'], 'A',['E'], {
+        'A': {
+            'a':'A',
+            'a':'B',
+            'a':'C',
+            'a':'D',
+            'a':'E',
+            'b': ['E','D']
+        },
+        'B': {
+            'a': 'D',
+            'b': 'E',
+        },
+        'C': {
+            
+            'b': 'C',
+        },
+        'D': {
+            'a': 'E',
+            'b': 'D',
+        },
+        'E': {},
+        
+        
+    })
 L32= Dfa(
     ['A','B','C','D','E','F','G'], ['0', '1'], 'A',['E','B','C'], {
         'A': {
@@ -481,32 +515,6 @@ L32= Dfa(
             '0': 'D',
             '1': 'E'
         },
-        
-    })
-L31= Nfa(
-    ['A','B','C','D','E'], ['a', 'b'], 'A',['E'], {
-        'A': {
-            'a':'A',
-            'a':'B',
-            'a':'C',
-            'a':'D',
-            'a':'E',
-            'b': ['E','D']
-        },
-        'B': {
-            'a': 'D',
-            'b': 'E',
-        },
-        'C': {
-            
-            'b': 'C',
-        },
-        'D': {
-            'a': 'E',
-            'b': 'D',
-        },
-        'E': {},
-        
         
     })
 A=L31.fa_converter()
