@@ -7,6 +7,7 @@ class Dfa:
         self.initial_state = initial_state
         self.final_states = final_states
         self.delta = delta
+
     def __str__(self):
         return f"states= {self.states}\nsigma= {self.sigma}\ninitial state= {self.initial_state}\nfinal states= {self.final_states}\ndelta= {self.delta}"
     
@@ -19,6 +20,7 @@ class Dfa:
                 return False
             print('The Language is Empty')
             return True
+        
     def Constructor(self, length):
         #Constructing the array of all strings with the defalut value of members of sigma
         all_str = self.sigma.copy()
