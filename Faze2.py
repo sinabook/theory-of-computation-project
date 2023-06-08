@@ -186,7 +186,7 @@ class Dfa:
             #intersection Print
             intersection = [Combination, language.sigma, initial, I_F_S,delta_f]
             #print('\n\nThis is the DFA for Intersection of Languages \n %s' %(intersection))
-            #l1-l2 P
+            #l1-l2 Print
             subtraction_l1l2 = [Combination, language.sigma, initial, S_1_2_F_S,delta_f]
             #print('\n\nThis is the DFA for L1-L2 \n %s' % (subtraction_l1l2))
 
