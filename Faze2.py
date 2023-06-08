@@ -183,7 +183,7 @@ class Dfa:
             #union Print
             union = [Combination, language.sigma, initial, U_F_S,delta_f]
             
-            #intersection
+            #intersection Print
             intersection = [Combination, language.sigma, initial, I_F_S,delta_f]
             #print('\n\nThis is the DFA for Intersection of Languages \n %s' %(intersection))
             #l1-l2 P
