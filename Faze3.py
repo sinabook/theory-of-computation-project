@@ -36,6 +36,7 @@ class Dfa:
                 for letter in self.sigma:
                     all_str.append(_str + letter)
         return all_str
+    
     def accepted(self, _str):
         #Is by defualt the start state
         current_state = self.initial_state
@@ -48,6 +49,7 @@ class Dfa:
             return True
         else:
             return False
+        
     def Infinite(self):
         n = len(self.states)
         #this theorem was told in class
