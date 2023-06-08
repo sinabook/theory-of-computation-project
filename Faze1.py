@@ -14,7 +14,7 @@ class Dfa:
             print('The Language is Empty')
             return True
     def Constructor(self, length):
-        #constructing the array of all strings with the defalut value of members of sigma
+        #Constructing the array of all strings with the defalut value of members of sigma
         all_str = self.sigma.copy()
         #copy is for that all changes done to all strings variable does not change the alphabet of strings
         num_sigma=len(self.sigma)
