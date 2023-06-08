@@ -46,6 +46,7 @@ class Dfa:
             return True
         else:
             return False
+        
     def Infinite(self):
         n = len(self.states)
         #this theorem was told in class
@@ -54,6 +55,7 @@ class Dfa:
             if (len(_str) >= n and self.accepted(_str)):
                 return True
         return False
+    
     def lan_elements(self):
         if (self.Infinite()):
             print("The Language is Infinite")
@@ -64,6 +66,7 @@ class Dfa:
                 if (self.accepted(string)):
                     elements.append(string)
             return elements
+
 
     def num_elements(self):
         if (self.Infinite()):
@@ -83,6 +86,7 @@ class Dfa:
                 short = self.lan_elements()[0]
                 return (short)
         
+
 
     def Long(self):
         
