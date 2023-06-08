@@ -206,8 +206,7 @@ class Dfa:
                 and (len(S_2_1_F_S) != 0)):
             print('L1 and L2 are the Seperated')
 #Inputs and functions for phase 2
-L21 = Dfa(
-    ['A','B','C',], ['a', 'b'], 'A', ['A', 'B'], {
+L21 = Dfa(['A','B','C',], ['a', 'b'], 'A', ['A', 'B'], {
         'A': {
             'a': 'B',
             'b': 'A'
