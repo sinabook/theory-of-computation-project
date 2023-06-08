@@ -1,7 +1,6 @@
 class Dfa:
     
-    def __init__(self, states, sigma, initial_state, final_states,
-                 delta):
+    def __init__(self, states, sigma, initial_state, final_states,delta):
         self.states = states
         self.sigma = sigma
         self.initial_state = initial_state
@@ -207,8 +206,7 @@ class Dfa:
                 and (len(S_2_1_F_S) != 0)):
             print('L1 and L2 are the Seperated')
 #Inputs and functions for phase 2
-L21 = Dfa(
-    ['A','B','C',], ['a', 'b'], 'A', ['A', 'B'], {
+L21 = Dfa(['A','B','C',], ['a', 'b'], 'A', ['A', 'B'], {
         'A': {
             'a': 'B',
             'b': 'A'
