@@ -7,8 +7,11 @@ class Dfa:
         self.initial_state = initial_state
         self.final_states = final_states
         self.delta = delta
+    def __str__(self):
+        return f"states= {self.states}\nsigma= {self.sigma}\ninitial state= {self.initial_state}\nfinal states= {self.final_states}\ndelta= {self.delta}"
+    
     def Empty(self):
-        #we check all string shorter or equal to the number of states on the language and if non of them get accepted the language is empty
+        #we can check all string shorter or equal to the number of states on the language and if non of them get accepted the language is empty
         all_str=self.Constructor(len(self.states))
         for _str in all_str:
             if (self.accepted(_str)):
@@ -17,7 +20,7 @@ class Dfa:
             print('The Language is Empty')
             return True
     def Constructor(self, length):
-        #constructing the array of all strings with the defalut value of members of sigma
+        #Constructing the array of all strings with the defalut value of members of sigma
         all_str = self.sigma.copy()
         #copy is for that all changes done to all strings variable does not change the alphabet of strings
         num_sigma=len(self.sigma)
@@ -69,7 +72,7 @@ class Dfa:
             return (len(self.lan_elements()))
     def Short(self):
         #we return the first element of the said array becuase we made strings by adding alphabets to previous ones
-        if(not self.Empty):
+        
             n=len(self.states)
             if (self.Infinite()):
                 str_lowerequal_2n_length = self.Constructor(2 * n)
@@ -79,59 +82,55 @@ class Dfa:
             else:
                 short = self.lan_elements()[0]
                 return (short)
-        else:
-            self.Empty()
+        
 
     def Long(self):
-        if (not self.Empty):
+        
             if (self.Infinite()):
-                print("This Language is infinite!")
+                print("Language is infinite!")
             else:
                 if len(self.lan_elements())!=0:
                     length = self.num_elements()
                     long = self.lan_elements()[length - 1]
                     return (long)
-        else:
-            self.Empty()
     def two_strings(self):
         accepted_str=[]
         not_accepted_str=[]
-        if (self.Infinite()):
-            print("Language is infinite!")
-        else:
-            str_lowerequal_n_length = self.Constructor(len(self.states))
-            for string in str_lowerequal_n_length:
-                if (self.accepted(string)):
-                     if(len(accepted_str)!=2):
-                        accepted_str.append(string)
+        str_lowerequal_n_length = self.Constructor(len(self.states))
+        for string in str_lowerequal_n_length:
+            if (self.accepted(string)):
+                if(len(accepted_str)!=2):
+                    accepted_str.append(string)
                 else :   
-                     if(len(not_accepted_str)!=2):
-                        not_accepted_str.append(string)  
+                    if(len(not_accepted_str)!=2):
+                        not_accepted_str.append(string) 
+                        
         return [accepted_str,not_accepted_str]
+        
     def all_str_len_k_num_m(self,k):
+        
         counter=0
         accepted_str=[]
-        if (self.isInfinite()):
-            print("Language is infinite!")
-        else:
-            str_lowerequal_n_length = self.Constructor(len(self.states))
-            for string in str_lowerequal_n_length:
-                if (self.accepted(string)):
-                     if(len(accepted_str)<=k):
-                        accepted_str.append(string)
-                        counter+=1
+        str_lowerequal_n_length = self.Constructor(len(self.states))
+        for string in str_lowerequal_n_length:
+            if (self.accepted(string)):
+                if(len(string)==k):
+                    accepted_str.append(string)
+                    counter+=1
+                    
+                
+                    
         return [accepted_str,counter]
     def Complement(self):
-        #we change the final states and the non-final states
         new_final = list(set(self.states) - set(self.final_states))
         comp = Dfa(self.states, self.sigma, self.initial_state,
                             new_final, self.delta)
         return comp
-    #this functions makes the second phase of the project
-    def Operation(self, L2):
+
+    def Operation(self, language):
         #Combination
-        delta = {}
-        initial = self.initial_state + L2.initial_state
+        delta_f= {}
+        initial = self.initial_state + language.initial_state
         Combination = [initial]#list of combined states with the defalut value of start states of each language
         S = 0 
         been_saw = []
@@ -151,14 +150,13 @@ class Dfa:
                 for symbols in self.sigma:
                     #for each of the alphabet we check that where does the annexated state go
                     next_state_1 = self.delta[current_state_1][symbols]
-                    next_state_2 = L2.delta[current_state_2][symbols]
+                    next_state_2 = language.delta[current_state_2][symbols]
                     next_state = next_state_1 + next_state_2
                     Combination.append(next_state)
                     state_value.update({symbols: next_state})#making a dictionary inside a transition function
-                delta.update({states: state_value})
+                delta_f.update({states: state_value})
                 S += 1
         Combination = list(set(Combination))#we turn this into a set so we get rid of repeated combinations
-
         #accepted states
         U_F_S = []#union final states
         I_F_S = []#intersection final states
@@ -169,39 +167,42 @@ class Dfa:
             current_state_2 = states[1]
             #union
             if ((current_state_1 in self.final_states)
-                    or (current_state_2 in L2.final_states)):
+                    or (current_state_2 in language.final_states)):
                 U_F_S.append(states)
-            union = [Combination, L2.sigma, initial, U_F_S,delta]
-            print('This is the DFA for Union of Languages \n %s' % (union))
             #intersection
             if ((current_state_1 in self.final_states)
-                    and (current_state_2 in L2.final_states)):
+                    and (current_state_2 in language.final_states)):
                 I_F_S.append(states)
-            intersection = [Combination, L2.sigma, initial, I_F_S,delta]
-            print('\n\nThis is the DFA for Intersection of Languages \n %s' %(intersection))
             #l1-l2
             if ((current_state_1 in self.final_states)
-                    and not (current_state_2 in L2.final_states)):
+                    and not (current_state_2 in language.final_states)):
                 S_1_2_F_S.append(states)
-            subtraction_l1l2 = [Combination, L2.sigma, initial, S_1_2_F_S,delta]
-            print('\n\nThis is the DFA for L1-L2 \n %s' % (subtraction_l1l2))
-
             #l2-l1
             if (not (current_state_1 in self.final_states)
-                    and (current_state_2 in L2.final_states)):
+                    and (current_state_2 in language.final_states)):
                 S_2_1_F_S.append(states)
-            subtraction_l2l1 = [Combination, L2.sigma, initial, S_2_1_F_S,delta]
-            print('\n\nThis is the DFA for L2-L1 \n %s' % (subtraction_l2l1))
-        #l1 sub l2
-        if (len(S_1_2_F_S) == 0):
-            print('L1 is a subset of L2')
-        if (len(S_2_1_F_S) == 0):
-            print('L2 is a subset of L1')
+            #union P
+            union = [Combination, language.sigma, initial, U_F_S,delta_f]
+            
+            #intersection
+            intersection = [Combination, language.sigma, initial, I_F_S,delta_f]
+            #print('\n\nThis is the DFA for Intersection of Languages \n %s' %(intersection))
+            #l1-l2 P
+            subtraction_l1l2 = [Combination, language.sigma, initial, S_1_2_F_S,delta_f]
+            #print('\n\nThis is the DFA for L1-L2 \n %s' % (subtraction_l1l2))
+
+            #l2-l1 P
+            subtraction_l2l1 = [Combination, language.sigma, initial, S_2_1_F_S,delta_f]
+            #print('\n\nThis is the DFA for L2-L1 \n %s' % (subtraction_l2l1))
+        print('This is the DFA for Union of Languages \n %s' % (union))
+        print('\n\nThis is the DFA for Intersection of Languages \n %s' %(intersection))
+        print('\n\nThis is the DFA for L1-L2 \n %s' % (subtraction_l1l2))
+        print('\n\nThis is the DFA for L2-L1 \n %s' % (subtraction_l2l1))
         #if both are each others subset they are equal
         if ((len(S_1_2_F_S) == 0)
                 and (len(S_2_1_F_S) == 0)):
             print('L1 and L2 are Equals')
-        #if neither of them are subset's of each other they are seprated
+        #if neither is subset of each other they are seprated
         if ((len(S_1_2_F_S) != 0)
                 and (len(S_2_1_F_S) != 0)):
             print('L1 and L2 are the Seperated')
