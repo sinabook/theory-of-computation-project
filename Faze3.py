@@ -307,7 +307,7 @@ class Dfa:
                 % (minimized_states, self.sigma, new_initial, new_final_states,
                    new_delta))
         else:
-            print('Your DFA is Also Minimized')
+            print('Your DFA is Minimized')
 class Nfa:
     def __init__(self, states, sigma, initial_state, final_states,
                  delta):
