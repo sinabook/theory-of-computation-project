@@ -1,6 +1,12 @@
 class Dfa:
     
-    
+    def __init__(self, states, sigma, initial_state, final_states,
+                 delta):
+        self.states = states
+        self.sigma = sigma
+        self.initial_state = initial_state
+        self.final_states = final_states
+        self.delta = delta
     def __str__(self):
         return f"states= {self.states}\nsigma= {self.sigma}\ninitial state= {self.initial_state}\nfinal states= {self.final_states}\ndelta= {self.delta}"
     
