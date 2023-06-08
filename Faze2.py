@@ -7,6 +7,9 @@ class Dfa:
         self.initial_state = initial_state
         self.final_states = final_states
         self.delta = delta
+    def __str__(self):
+        return f"states= {self.states}\nsigma= {self.sigma}\ninitial state= {self.initial_state}\nfinal states= {self.final_states}\ndelta= {self.delta}"
+    
     def Empty(self):
         #we can check all string shorter or equal to the number of states on the language and if non of them get accepted the language is empty
         all_str=self.Constructor(len(self.states))
@@ -69,7 +72,7 @@ class Dfa:
             return (len(self.lan_elements()))
     def Short(self):
         #we return the first element of the said array becuase we made strings by adding alphabets to previous ones
-        if(not self.Empty):
+        
             n=len(self.states)
             if (self.Infinite()):
                 str_lowerequal_2n_length = self.Constructor(2 * n)
@@ -79,11 +82,10 @@ class Dfa:
             else:
                 short = self.lan_elements()[0]
                 return (short)
-        else:
-            self.Empty()
+        
 
     def Long(self):
-        if (not self.Empty):
+        
             if (self.Infinite()):
                 print("Language is infinite!")
             else:
@@ -91,43 +93,40 @@ class Dfa:
                     length = self.num_elements()
                     long = self.lan_elements()[length - 1]
                     return (long)
-        else:
-            self.Empty()
     def two_strings(self):
         accepted_str=[]
         not_accepted_str=[]
-        if (self.Infinite()):
-            print("Language is infinite!")
-        else:
-            str_lowerequal_n_length = self.Constructor(len(self.states))
-            for string in str_lowerequal_n_length:
-                if (self.accepted(string)):
-                     if(len(accepted_str)!=2):
-                        accepted_str.append(string)
+        str_lowerequal_n_length = self.Constructor(len(self.states))
+        for string in str_lowerequal_n_length:
+            if (self.accepted(string)):
+                if(len(accepted_str)!=2):
+                    accepted_str.append(string)
                 else :   
-                     if(len(not_accepted_str)!=2):
-                        not_accepted_str.append(string)  
+                    if(len(not_accepted_str)!=2):
+                        not_accepted_str.append(string) 
+                        
         return [accepted_str,not_accepted_str]
+        
     def all_str_len_k_num_m(self,k):
+        
         counter=0
         accepted_str=[]
-        if (self.isInfinite()):
-            print("Language is infinite!")
-        else:
-            str_lowerequal_n_length = self.Constructor(len(self.states))
-            for string in str_lowerequal_n_length:
-                if (self.accepted(string)):
-                     if(len(accepted_str)<=k):
-                        accepted_str.append(string)
-                        counter+=1
+        str_lowerequal_n_length = self.Constructor(len(self.states))
+        for string in str_lowerequal_n_length:
+            if (self.accepted(string)):
+                if(len(string)==k):
+                    accepted_str.append(string)
+                    counter+=1
+                    
+                
+                    
         return [accepted_str,counter]
     def Complement(self):
-        #we change the final states and the non-final states
         new_final = list(set(self.states) - set(self.final_states))
         comp = Dfa(self.states, self.sigma, self.initial_state,
                             new_final, self.delta)
         return comp
-    
+
     def Operation(self, language):
         #Combination
         delta_f= {}
