@@ -182,6 +182,7 @@ class Dfa:
                 S_2_1_F_S.append(states)
             #union Print
             union = [Combination, language.sigma, initial, U_F_S,delta_f]
+            #print('This is the DFA for Union of Languages \n %s' % (union))
             
             #intersection Print
             intersection = [Combination, language.sigma, initial, I_F_S,delta_f]
